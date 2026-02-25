@@ -62,8 +62,8 @@ export async function GET(
         return {
           ...attendee,
           name: contact?.name || attendee.name,
-          company: contact?.company,
-          title: contact?.title,
+          company: contact?.company ?? undefined,
+          title: contact?.title ?? undefined,
           linkedIn: contact?.linkedIn,
           lastEmails: emails || [],
           lastMeeting: lastMeetingEvent ? mapEventToMeeting(lastMeetingEvent) : undefined,

@@ -25,11 +25,11 @@ export async function getEmailsWithPerson(email: string, limit: number = 5) {
       });
       const headers = detail.data.payload?.headers || [];
       return {
-        id: msg.id,
+        id: msg.id || undefined,
         subject: headers.find((h) => h.name === "Subject")?.value || "(no subject)",
-        date: headers.find((h) => h.name === "Date")?.value,
-        snippet: detail.data.snippet,
-        threadId: detail.data.threadId,
+        date: headers.find((h) => h.name === "Date")?.value || undefined,
+        snippet: detail.data.snippet || undefined,
+        threadId: detail.data.threadId || undefined,
       };
     })
   );
@@ -58,11 +58,11 @@ export async function getRecentMentions(query: string, limit: number = 5) {
       });
       const headers = detail.data.payload?.headers || [];
       return {
-        id: msg.id,
+        id: msg.id || undefined,
         subject: headers.find((h) => h.name === "Subject")?.value || "(no subject)",
-        date: headers.find((h) => h.name === "Date")?.value,
-        snippet: detail.data.snippet,
-        threadId: detail.data.threadId,
+        date: headers.find((h) => h.name === "Date")?.value || undefined,
+        snippet: detail.data.snippet || undefined,
+        threadId: detail.data.threadId || undefined,
       };
     })
   );

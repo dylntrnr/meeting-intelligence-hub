@@ -51,21 +51,6 @@ export default function ActionItemsPage() {
     }
   }, [items, useLocal]);
 
-  useEffect(() => {
-    const handler = (event: KeyboardEvent) => {
-      if (event.key.toLowerCase() === "c" && focusedId) {
-        const target = items.find(
-          (item) => item.id === focusedId || item.clientId === focusedId
-        );
-        if (target) {
-          toggleComplete(target);
-        }
-      }
-    };
-    window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
-  }, [focusedId, items, toggleComplete]);
-
   const filteredItems = useMemo(() => {
     return items.filter((item) => {
       if (filters.owner && !item.owner.toLowerCase().includes(filters.owner.toLowerCase()))
@@ -131,6 +116,21 @@ export default function ActionItemsPage() {
       return acc;
     }, {});
   }, [filteredItems, grouped]);
+
+  useEffect(() => {
+    const handler = (event: KeyboardEvent) => {
+      if (event.key.toLowerCase() === "c" && focusedId) {
+        const target = items.find(
+          (item) => item.id === focusedId || item.clientId === focusedId
+        );
+        if (target) {
+          toggleComplete(target);
+        }
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [focusedId, items, toggleComplete]);
 
   return (
     <div className="space-y-8">
